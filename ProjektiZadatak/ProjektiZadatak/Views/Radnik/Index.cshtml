@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ProjektniZadatak.Models.Radnik>
+
+@{
+    ViewData["Title"] = "Lista";
+}
+
+<h1>Lista</h1>
+
+<form class="form-group" action="Radnik/Dodaj">
+    <input  type="submit" value="Dodaj" class="btn btn-primary" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prezime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetoPlata)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrutoPlata)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    var netoPlata = Math.Round(item.NetoPlata, 2); 
+    var BrutoPlata = Math.Round(item.BrutoPlata, 2);
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adresa)
+            </td>
+            <td>
+               
+                @Html.DisplayFor(modelItem =>netoPlata)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => BrutoPlata)
+            </td>
+            <td>
+                <a asp-action="Detalji" asp-route-id="@item.ID">Detalji</a> |
+                <a asp-action="Izbrisi" asp-route-id="@item.ID">Izbriši</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
